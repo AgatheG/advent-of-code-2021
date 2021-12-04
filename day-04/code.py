@@ -1,4 +1,12 @@
 import numpy as np
+from argparse import ArgumentParser
+
+
+# To easily switch to input/test files
+parser = ArgumentParser()
+parser.add_argument("-i", "-input", default="input.txt", dest="file")
+args = parser.parse_args()
+
 
 class Board(object):
     BOARD_SIDE = 5
@@ -22,7 +30,7 @@ class Board(object):
 
 
 boards = set()
-with open("input.txt", "r") as file:
+with open(args.file, "r") as file:
     drawn_numbers, *grids = file.read().split("\n\n")
     drawn_numbers = np.fromstring(drawn_numbers, dtype=int, sep=',')
     for grid in grids:
