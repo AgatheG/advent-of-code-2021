@@ -15,18 +15,22 @@ class Board(object):
 
     def __init__(self, grid):
         self.values = grid
+        self.score = None
+
+    @property
+    def winning(self):
+        return bool(self.score)
 
     def check(self, value):
         i, j = np.where(self.values == value)
-        if not i.size: #  Value is not in the board
-            return self.NO_WIN
+        if not i.size:  # Value is not in the board
+            return
 
         self.values[i, j] = self.MARKED
 
         if self.values[:, j].sum() == self.MARKED * self.BOARD_SIDE or\
             self.values[i, :].sum() == self.MARKED * self.BOARD_SIDE:
-            return self.values[self.values != self.MARKED].sum() * value
-        return self.NO_WIN
+            self.score = self.values[self.values != self.MARKED].sum() * value
 
 
 boards = set()
@@ -42,13 +46,13 @@ with open(args.file, "r") as file:
 winners = set()
 for number in drawn_numbers:
     for board in boards:
-        score = board.check(number)
-        if score != Board.NO_WIN:
+        board.check(number)
+        if board.winning:
             if not winners:
-                print("Part 1: The first board to win has a score of {}".format(score))
+                print("Part 1: The first board to win has a score of {}".format(board.score))
             winners.add(board)
     boards -= winners
     if not boards:
         break
 
-print("Part 2: The last board to win has a score of {}".format(score))
+print("Part 2: The last board to win has a score of {}".format(board.score))
