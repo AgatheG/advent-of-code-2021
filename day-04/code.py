@@ -11,7 +11,6 @@ args = parser.parse_args()
 class Board(object):
     BOARD_SIDE = 5
     MARKED = -1
-    NO_WIN = 0
 
     def __init__(self, grid):
         self.values = grid
