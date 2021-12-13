@@ -3,7 +3,7 @@ from collections import defaultdict, deque, Counter
 
 # To easily switch to input/test files
 parser = ArgumentParser()
-parser.add_argument("-row", "-input", default="input.txt", dest="file")
+parser.add_argument("-i", "-input", default="input.txt", dest="file")
 args = parser.parse_args()
 
 SEPARATOR = '-'

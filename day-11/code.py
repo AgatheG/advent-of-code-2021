@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 
 # To easily switch to input/test files
 parser = ArgumentParser()
-parser.add_argument("-row", "-input", default="input.txt", dest="file")
+parser.add_argument("-i", "-input", default="input.txt", dest="file")
 args = parser.parse_args()
 
 with open(args.file, "r") as file:
